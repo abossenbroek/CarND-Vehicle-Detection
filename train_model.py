@@ -1,3 +1,4 @@
+#!/usrs/bin/python3
 import numpy as np
 import pandas as pd
 import cv2
@@ -15,10 +16,10 @@ def color_hist(img, nbins=32, bins_range=(0,256)):
 
 def hog_features(img, orient=8, pix_per_cell=8, cell_per_block=2):
     features = hog(img, orientations=orient, pixels_per_cell=(pix_per_cell, pix_per_cell),
-                   cells_per_block=(cell_per_block, cell_per_block), transform_sqrt=False, 
+                   cells_per_block=(cell_per_block, cell_per_block), transform_sqrt=False,
                    visualise=False)
     return features
- 
+
 
 def extract_features(img, size=32):
     img = cv2.resize(img, (size, size))
