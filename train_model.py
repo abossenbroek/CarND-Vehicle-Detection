@@ -5,6 +5,7 @@ import cv2
 from skimage.feature import hog
 import glob
 import pickle
+from sklearn.preprocessing import StandardScaler
 
 def color_hist(img, nbins=32, bins_range=(0,256)):
     Y_channel = np.histogram(img[:,:,0], bins=nbins, range=bins_range, density=True)
