@@ -42,10 +42,10 @@ for img_fn in glob.iglob('non-vehicles/**/*png'):
 noncar_features = np.stack(noncar_features[:len(car_features)])
 car_features = np.stack(car_features)
 
-x = np.append(car_features[:N], noncar_features[:N], axis=0)
+x = np.append(car_features, noncar_features, axis=0)
 scaler = StandardScaler().fit(x)
 X_scaled = scaler.transform(x)
-y = np.hstack((np.ones(car_features[:N].shape[0]), np.zeros(noncar_features[:N].shape[0])))
+y = np.hstack((np.ones(car_features.shape[0]), np.zeros(noncar_features.shape[0])))
 
 from sklearn.svm import SVC
 import sklearn.metrics as metrics
