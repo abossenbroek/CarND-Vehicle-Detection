@@ -82,8 +82,6 @@ def train_model():
     # Define the range over which the grid should search, currently at 5 can be increased.
     param_grid = {
         'classify__C': [0.1, 0.5, 1, 5],
-        'classify__penalty': ['l1', 'l2'],
-        'classify__loss': ['squared_hinge', 'hinge'],
          }
 
     cv = StratifiedShuffleSplit(n_splits=4, test_size=0.2, random_state=42)
