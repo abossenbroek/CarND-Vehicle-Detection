@@ -84,9 +84,10 @@ def train_model():
         'classify__C': [0.1, 0.5, 1, 5],
          }
 
+    np.random.seed(42)
     cv = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=42)
     grid = GridSearchCV(pipe, param_grid=param_grid, cv=cv, verbose=2, n_jobs=64,
-                        pre_dispatch='n_jobs',
+                        pre_dispatch='2*n_jobs',
                         scoring=metrics.make_scorer(metrics.scorer.roc_auc_score))
     clf = grid.fit(x, y)
 
