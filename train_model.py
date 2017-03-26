@@ -31,13 +31,17 @@ def load_images():
         noncar_features.append(vr.extract_features(img))
 
     car_features = np.stack(car_features)
+    print(car_features.shape)
     noncar_features = np.stack(noncar_features)
+    print(noncar_features.shape)
 
     size_dif = len(noncar_features) - len(car_features)
     if size_dif > 0:
+        print("Increasing car features")
         add_idx = np.random.randint(0, len(car_features)-1, size_dif)
         car_features = np.concatenate((car_features, car_features[add_idx]))
     elif size_dif < 0:
+        print("Increasing non car features")
         add_idx = np.random.randint(0, len(noncar_features)-1, abs(size_dif))
         noncar_features = np.concatenate((noncar_features, noncar_features[add_idx]))
 
@@ -73,6 +77,7 @@ def train_model():
     [x, y] = load_data()
 
     print(x.shape)
+    return None
 
     pipe = Pipeline([
         ('Scaler', StandardScaler()),
