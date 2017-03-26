@@ -81,7 +81,7 @@ def train_model():
 
     # Define the range over which the grid should search, currently at 5 can be increased.
     param_grid = {
-        'classify__C': [0.1, 0.5, 1, 5],
+        'classify__C': [0.1, 0.5],
          }
 
     np.random.seed(42)
