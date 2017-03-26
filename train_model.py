@@ -23,11 +23,11 @@ def load_images():
     noncar_features = []
 
     for img_fn in glob.iglob('vehicles/**/*png'):
-        img = cv2.cvtColor(cv2.imread(img_fn), cv2.COLOR_RGB2YCR_CB)
+        img = cv2.cvtColor(cv2.imread(img_fn), cv2.COLOR_BGR2YCR_CB)
         car_features.append(vr.extract_features(img))
 
     for img_fn in glob.iglob('non-vehicles/**/*png'):
-        img = cv2.cvtColor(cv2.imread(img_fn), cv2.COLOR_RGB2YCR_CB)
+        img = cv2.cvtColor(cv2.imread(img_fn), cv2.COLOR_BGR2YCR_CB)
         noncar_features.append(vr.extract_features(img))
 
     car_features = np.stack(car_features)
