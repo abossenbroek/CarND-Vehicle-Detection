@@ -90,11 +90,11 @@ def train_model():
     # Define the range over which the grid should search, currently at 5 can be
     # increased.
     param_grid = {
-        'classify__C': [1],
+        'classify__C': [5],
          }
 
     np.random.seed(42)
-    cv = StratifiedShuffleSplit(n_splits=10, test_size=0.3, random_state=42)
+    cv = StratifiedShuffleSplit(n_splits=10, test_size=0.4, random_state=42)
     grid = GridSearchCV(pipe, param_grid=param_grid, cv=cv, verbose=2, n_jobs=64,
                         pre_dispatch='2*n_jobs',
                         scoring=metrics.make_scorer(metrics.scorer.roc_auc_score))
