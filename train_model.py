@@ -18,6 +18,7 @@ from sys import platform
 
 DATA_FILE = 'data.p'
 
+
 def load_images():
     car_features = []
     noncar_features = []
@@ -43,10 +44,12 @@ def load_images():
     elif size_dif < 0:
         print("Increasing non car features")
         add_idx = np.random.randint(0, len(noncar_features)-1, abs(size_dif))
-        noncar_features = np.concatenate((noncar_features, noncar_features[add_idx]))
+        noncar_features = np.concatenate((noncar_features,
+                                          noncar_features[add_idx]))
 
-    x = np.append(car_features, noncar_features, axis=0)
-    y = np.hstack((np.ones(car_features.shape[0]), np.zeros(noncar_features.shape[0])))
+    x = np.concatenate((car_features, noncar_features), axis=0)
+    y = np.concatenate((np.ones(car_features.shape[0]),
+                        np.zeros(noncar_features.shape[0])))
     return [x, y]
 
 
@@ -66,27 +69,28 @@ def load_data():
     else:
         [x, y] = load_images()
 
-        print("shape of x %s %s"  % x.shape)
-        print("shape of y %s"  % y.shape)
+        print("shape of x %s %s" % x.shape)
+        print("shape of y %s" % y.shape)
 
     print("Finished loading data")
 
     return [x, y]
 
+
 def train_model():
     [x, y] = load_data()
 
     print(x.shape)
-    return None
 
     pipe = Pipeline([
-        ('Scaler', StandardScaler()),
+        ('scaler', StandardScaler()),
         ('classify', LinearSVC())
     ])
 
-    # Define the range over which the grid should search, currently at 5 can be increased.
+    # Define the range over which the grid should search, currently at 5 can be
+    # increased.
     param_grid = {
-        'classify__C': [0.1, 0.5],
+        'classify__C': [0.5, 1],
          }
 
     np.random.seed(42)
